@@ -56,11 +56,13 @@
 </div>
 
 <!-- EmailJS v4 UMD SDK -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script type="text/javascript">
-  emailjs.init('hoBvs6-c-UoUDwVhh'); // Replace with your EmailJS public key
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // Initialize EmailJS
+  emailjs.init('hoBvs6-c-UoUDwVhh');
 
   function submitForm() {
+    // Collect form data
     const formData = {
       fullName: document.getElementById("fullName").value,
       email: document.getElementById("email").value,
@@ -73,14 +75,14 @@
       school: document.getElementById("school").value
     };
 
-    // Hide form and show result section
+    // Hide form, show result
     document.getElementById("formSection").style.display = "none";
     const resultSection = document.getElementById("resultSection");
     const statusBox = document.getElementById("statusBox");
     const downloadBtn = document.getElementById("downloadBtn");
     resultSection.style.display = "block";
 
-    // Random success/fail message
+    // 60% success / 40% fail
     const success = Math.random() >= 0.4;
     if (success) {
       statusBox.innerHTML = `<div style="width:60px;height:60px;margin:auto;border-radius:50%;background:#27ae60;display:flex;align-items:center;justify-content:center;font-size:30px;color:white;">✔</div>
