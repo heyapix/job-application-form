@@ -57,8 +57,9 @@
 
 <!-- EmailJS SDK -->
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-  (function(){ emailjs.init("hoBvs6-c-UoUDwVhh"); })(); // <-- REPLACE with your EmailJS Public Key
+<script type="module">
+  import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+  emailjs.init('YOUR_PUBLIC_KEY'); // replace with your EmailJS public key
 </script>
 
 <script>
@@ -108,12 +109,6 @@ function submitForm() {
   const templateParams = {...formData};
 
   emailjs.send('service_de6sh1a','template_dgbi8xs',templateParams)
-    .then(function(response){
-      console.log('Email sent!', response.status, response.text);
-    }, function(error){
-      console.log('Email failed...', error);
-    });
-}
 </script>
 </body>
 </html>
