@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Employment Job Application</title>
 <style>
-  body { font-family: Arial, sans-serif; background-color: #f5f6fa; margin: 0; padding: 20px; }
-  .application-form { background: white; max-width: 800px; margin: auto; padding: 30px 40px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-  h1 { text-align: center; text-transform: uppercase; margin-bottom: 30px; color: #333; }
-  .section { background-color: #d9e3f0; padding: 8px; font-weight: bold; text-transform: uppercase; margin-top: 25px; border-radius: 4px; }
-  label { display: block; margin-top: 12px; font-weight: bold; }
-  input, textarea { width: 100%; padding: 6px; border: none; border-bottom: 1px solid #333; outline: none; font-size: 15px; }
-  button { margin-top: 25px; display: block; width: 100%; background-color: #4a6cf7; color: white; border: none; padding: 12px; font-size: 16px; border-radius: 6px; cursor: pointer; }
-  button:hover { background-color: #3856c8; }
-  #resultSection { text-align: center; margin-top: 25px; display: none; }
+  body { font-family: Arial,sans-serif; background-color:#f5f6fa; margin:0; padding:20px; }
+  .application-form { background:#fff; max-width:800px; margin:auto; padding:30px 40px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
+  h1 { text-align:center; text-transform:uppercase; margin-bottom:30px; color:#333; }
+  .section { background:#d9e3f0; padding:8px; font-weight:bold; text-transform:uppercase; margin-top:25px; border-radius:4px; }
+  label { display:block; margin-top:12px; font-weight:bold; }
+  input, textarea { width:100%; padding:6px; border:none; border-bottom:1px solid #333; outline:none; font-size:15px; }
+  button { margin-top:25px; display:block; width:100%; background-color:#4a6cf7; color:white; border:none; padding:12px; font-size:16px; border-radius:6px; cursor:pointer; }
+  button:hover { background-color:#3856c8; }
+  #resultSection { text-align:center; margin-top:25px; display:none; }
 </style>
 </head>
 <body>
@@ -21,7 +21,6 @@
 <div class="application-form">
   <h1>Employment Job Application</h1>
 
-  <!-- FORM -->
   <div id="formSection">
     <div class="section">Personal Information</div>
     <label>Full Name</label>
@@ -50,68 +49,66 @@
     <button type="button" onclick="submitForm()">Submit Application</button>
   </div>
 
-  <!-- RESULT + DOWNLOAD -->
   <div id="resultSection">
     <div id="statusBox"></div>
     <button id="downloadBtn" style="display:none; margin-top:20px; padding:12px 20px; background:#27ae60; color:white; border:none; border-radius:6px; cursor:pointer;">Download Application</button>
   </div>
 </div>
 
-<!-- EmailJS v4 SDK -->
-<script type="module">
-import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
-emailjs.init('hoBvs6-c-UoUDwVhh'); // Replace with your EmailJS public key
+<!-- EmailJS v4 UMD SDK -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/javascript">
+  emailjs.init('hoBvs6-c-UoUDwVhh'); // Replace with your EmailJS public key
 
-window.submitForm = function() {
-  const formData = {
-    fullName: document.getElementById("fullName").value,
-    email: document.getElementById("email").value,
-    phone: document.getElementById("phone").value,
-    address: document.getElementById("address").value,
-    position: document.getElementById("position").value,
-    startDate: document.getElementById("startDate").value,
-    eligible: document.getElementById("eligible").value,
-    education: document.getElementById("education").value,
-    school: document.getElementById("school").value
-  };
+  function submitForm() {
+    const formData = {
+      fullName: document.getElementById("fullName").value,
+      email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
+      address: document.getElementById("address").value,
+      position: document.getElementById("position").value,
+      startDate: document.getElementById("startDate").value,
+      eligible: document.getElementById("eligible").value,
+      education: document.getElementById("education").value,
+      school: document.getElementById("school").value
+    };
 
-  // Hide form, show result section
-  document.getElementById("formSection").style.display = "none";
-  const resultSection = document.getElementById("resultSection");
-  const statusBox = document.getElementById("statusBox");
-  const downloadBtn = document.getElementById("downloadBtn");
-  resultSection.style.display = "block";
+    // Hide form and show result section
+    document.getElementById("formSection").style.display = "none";
+    const resultSection = document.getElementById("resultSection");
+    const statusBox = document.getElementById("statusBox");
+    const downloadBtn = document.getElementById("downloadBtn");
+    resultSection.style.display = "block";
 
-  // Random success/fail message
-  const success = Math.random() >= 0.4;
-  if (success) {
-    statusBox.innerHTML = `<div style="width:60px;height:60px;margin:auto;border-radius:50%;background:#27ae60;display:flex;align-items:center;justify-content:center;font-size:30px;color:white;">✔</div>
-                           <p style="color:#27ae60;font-weight:bold;">Form submitted successfully!</p>`;
-  } else {
-    statusBox.innerHTML = `<div style="width:60px;height:60px;margin:auto;border-radius:50%;background:#e74c3c;display:flex;align-items:center;justify-content:center;font-size:30px;color:white;">✖</div>
-                           <p style="color:#e74c3c;font-weight:bold;">Form failed to submit.</p>`;
-  }
-
-  // Download button
-  downloadBtn.style.display = "inline-block";
-  downloadBtn.onclick = function() {
-    let content = "";
-    for (let key in formData) {
-      content += `${key}: ${formData[key]}\n`;
+    // Random success/fail message
+    const success = Math.random() >= 0.4;
+    if (success) {
+      statusBox.innerHTML = `<div style="width:60px;height:60px;margin:auto;border-radius:50%;background:#27ae60;display:flex;align-items:center;justify-content:center;font-size:30px;color:white;">✔</div>
+                             <p style="color:#27ae60;font-weight:bold;">Form submitted successfully!</p>`;
+    } else {
+      statusBox.innerHTML = `<div style="width:60px;height:60px;margin:auto;border-radius:50%;background:#e74c3c;display:flex;align-items:center;justify-content:center;font-size:30px;color:white;">✖</div>
+                             <p style="color:#e74c3c;font-weight:bold;">Form failed to submit.</p>`;
     }
-    const blob = new Blob([content], {type: "text/plain"});
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "Job_Application.txt";
-    link.click();
-  };
 
-  // Send email via EmailJS v4
-  const templateParams = { ...formData };
-  emailjs.send('service_de6sh1a', 'template_dgbi8xs', templateParams)
-    .then(response => console.log('Email sent!', response))
-    .catch(error => console.error('Email failed...', error));
-};
+    // Download button
+    downloadBtn.style.display = "inline-block";
+    downloadBtn.onclick = function() {
+      let content = "";
+      for (let key in formData) {
+        content += `${key}: ${formData[key]}\n`;
+      }
+      const blob = new Blob([content], {type: "text/plain"});
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "Job_Application.txt";
+      link.click();
+    };
+
+    // Send email via EmailJS v4
+    emailjs.send('service_de6sh1a', 'template_dgbi8xs', formData)
+      .then(response => console.log('Email sent!', response))
+      .catch(error => console.error('Email failed...', error));
+  }
 </script>
 
 </body>
